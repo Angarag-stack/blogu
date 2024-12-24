@@ -1,4 +1,3 @@
-
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import Link from "next/link";
@@ -9,7 +8,6 @@ const Page = () => {
   const router = useRouter();
   const { category } = router.query;
   console.log(router.query);
-  
 
   const {
     data: products,
@@ -18,7 +16,8 @@ const Page = () => {
   } = useSWR(`https://fakestoreapi.com/products/category/${category}`, fetcher);
 
   if (error) return <div>failed to load</div>;
-  if (isLoading) return (
+  if (isLoading)
+    return (
       <div className="container grid min-h-screen grid-cols-3 gap-4 mx-auto mt-20">
         loading
       </div>
@@ -26,22 +25,22 @@ const Page = () => {
 
   return (
     <div className="grid grid-cols-3 gap-10 w-[1280px] m-auto">
-      {products.map((product) => (
-        <Link key={product.id}href={`card/${product.id}`}>
+      {products?.map((product) => (
+        <Link key={product?.id} href={`card/${product?.id}`}>
           {" "}
-          <div  className="card bg-base-100 w-96 h-[488px]  shadow-xl">
+          <div className="card bg-base-100 w-96 h-[488px]  shadow-xl">
             <figure>
-              <img src={product.image} alt="Shoes" />
+              <img src={product?.image} alt="Shoes" />
             </figure>
             <div className="card-body">
               <h2 className="card-title">
-                {product.title}
+                {product?.title}
                 <div className="badge badge-secondary">NEW</div>
               </h2>
               <p>{""}</p>
               <div className="card-actions justify-end flex gap-3">
-                <div className="badge badge-outline">{product.category}</div>
-                <div className="badge badge-outline">{product.price}</div>
+                <div className="badge badge-outline">{product?.category}</div>
+                <div className="badge badge-outline">{product?.price}</div>
               </div>
             </div>
           </div>
