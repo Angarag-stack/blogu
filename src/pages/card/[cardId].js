@@ -1,49 +1,20 @@
-// import { useRouter } from "next/router";
-// import { useState } from "react";
-
-// const { default: useSWR } = require("swr");
-
-// const fetcher = (...args) => fetch(...args).then((res) => res.json());
-// const Detailcard = () => {
-//   const router = useRouter();
-//   const query = router.query.cardId;
-//   const url = `https://fakestoreapi.com/products/${query}`;
-//   const { data, isLoading } = useSWR(url, fetcher);
-//   const [buys, setBuys] = useState(0);
-//   console.log(data);
-//   const buyProducts = () => {
-//     setBuys((prev) => prev + 1);
-//   };
-//   if (isLoading) return <p>wait</p>;
-
 import { useRouter } from "next/router";
 import { useState } from "react";
-import useSWR from "swr";
 
-const fetcher = (url) =>
-  fetch(url).then((res) => {
-    if (!res.ok) throw new Error("Failed to fetch");
-    return res.json();
-  });
+const { default: useSWR } = require("swr");
 
+const fetcher = (...args) => fetch(...args).then((res) => res.json());
 const Detailcard = () => {
   const router = useRouter();
   const query = router.query.cardId;
-
-  if (!query) {
-    return <p>Invalid card ID</p>;
-  }
-
   const url = `https://fakestoreapi.com/products/${query}`;
-  const { data, error } = useSWR(url, fetcher);
+  const { data, isLoading } = useSWR(url, fetcher);
   const [buys, setBuys] = useState(0);
-
+  console.log(data);
   const buyProducts = () => {
     setBuys((prev) => prev + 1);
   };
-
-  if (error) return <p>Error loading data</p>;
-  if (!data) return <p>Loading...</p>;
+  if (isLoading) return <p>wait</p>;
   return (
     <div className="card lg:card-side bg-base-100 shadow-xl w-[1280px] m-auto grid grid-cols-2 rounded-xl">
       <figure className=" ">
