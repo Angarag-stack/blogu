@@ -8,8 +8,10 @@ const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 export const Cards = () => {
   const [search] = useQueryState("search");
-  const url = `https://fakestoreapi.com/products`;
+  // const url = `https://fakestoreapi.com/products`;
+  const url = "https://dev.to/api/articles";
   const { data: items, isLoading } = useSWR(url, fetcher);
+  console.log(data);
   if (isLoading) {
     return <p>wait</p>;
   }

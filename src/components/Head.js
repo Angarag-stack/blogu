@@ -5,7 +5,9 @@ const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 export const Header = (props) => {
   const [search, setSearch] = useQueryState("search");
-  const url = `https://fakestoreapi.com/products/categories`;
+  // const url = `https://fakestoreapi.com/products/categories`;
+  const url = "https://dev.to/api/articles";
+
   const { data: categories, isLoading } = useSWR(url, fetcher);
   const { buys } = props;
   if (isLoading) {
