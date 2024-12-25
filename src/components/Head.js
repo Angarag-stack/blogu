@@ -21,7 +21,11 @@ export const Header = (props) => {
         </Link>
         {categories?.map((category) => {
           return (
-            <Link key={category?.id} className="text-lg" href={`/${category}`}>
+            <Link
+              key={category?.id}
+              className="text-lg hover:font-extrabold"
+              href={`/${category}`}
+            >
               {category}
             </Link>
           );
